@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using LeaveManagement.Application.Contracts.Persistences;
 using MediatR;
 
@@ -18,10 +17,10 @@ namespace Application.Features.LeaveType.Queries.GetAllLeaveTypesDetail
 		public async Task<LeaveTypesDetailDto> Handle(GetLeaveTypesDetailQuery request, CancellationToken cancellationToken)
 		{
 			//Query the Database
-			var leaveTypes = await _repository.GetByIdAsync(request.Id);
+			var leaveTypeDetail = await _repository.GetByIdAsync(request.Id);
 
 			//Convert data objects to DTO objects
-			var data = _mapper.Map<LeaveTypesDetailDto>(leaveTypes);
+			var data = _mapper.Map<LeaveTypesDetailDto>(leaveTypeDetail);
 
 			//return list of DTO objects
 			return data;
