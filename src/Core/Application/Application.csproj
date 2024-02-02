@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Contracts\**" />
-    <EmbeddedResource Remove="Contracts\**" />
-    <None Remove="Contracts\**" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>
