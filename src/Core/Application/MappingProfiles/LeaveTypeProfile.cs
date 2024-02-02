@@ -13,7 +13,7 @@ namespace Application.MappingProfiles
 	{
 		public LeaveTypeProfile()
 		{
-			CreateMap<LeaveTypeDto, LeaveType>().ReverseMap();
+			CreateMap<LeaveTypesDetailDto, LeaveType>().ReverseMap();
 		}
 	}
 }
