@@ -1,7 +1,6 @@
 ﻿using Application.Exceptions;
 using AutoMapper;
 using LeaveManagement.Application.Contracts.Persistences;
-using LeaveManagement.Domain;
 using MediatR;
 
 namespace Application.Features.LeaveType.Commands.CreateLeaveType

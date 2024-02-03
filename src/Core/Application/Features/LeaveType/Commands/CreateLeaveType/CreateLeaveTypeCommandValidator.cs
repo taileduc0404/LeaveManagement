@@ -25,6 +25,7 @@ namespace Application.Features.LeaveType.Commands.CreateLeaveType
 			RuleFor(x => x)
 				.MustAsync(LeaveTypeNameUnique)
 				.WithMessage("LeaveType already exist.");
+
 			_repository = repository;
 		}
 
