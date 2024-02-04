@@ -13,12 +13,7 @@ namespace Persistence.Repositories
 
 		public async Task<bool> IsLeaveTypeUnique(string name)
 		{
-			return await _context.leaveTypes.AnyAsync(x => x.Name == name);
-		}
-
-		public async Task<bool> LeaveTypeMustExist(int id)
-		{
-			return await _context.leaveTypes.AnyAsync(x => x.Id == id);
-		}
+			return await _context.leaveTypes.AnyAsync(x => x.Name == name) == false;
+		}		
 	}
 }

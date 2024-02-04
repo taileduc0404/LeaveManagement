@@ -35,6 +35,22 @@ namespace Application.Features.LeaveType.Commands.CreateLeaveType
 
 			//return
 			return leaveTypeToCreate.Id;
+
+			//// Validate incoming data
+			//var validator = new CreateLeaveTypeCommandValidator(_repository);
+			//var validationResult = await validator.ValidateAsync(request);
+
+			//if (validationResult.Errors.Any())
+			//	throw new BadRequestException("Invalid Leave type", validationResult);
+
+			//// convert to domain entity object
+			//var leaveTypeToCreate = _mapper.Map<LeaveManagement.Domain.LeaveType>(request);
+
+			//// add to database
+			//await _repository.CreateAsync(leaveTypeToCreate);
+
+			//// retun record id
+			//return leaveTypeToCreate.Id;
 		}
 	}
 }
