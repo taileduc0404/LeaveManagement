@@ -16,10 +16,10 @@ namespace Application.MappingProfiles
 	{
 		public LeaveTypeProfile()
 		{
-			CreateMap<LeaveTypesDto, LeaveType>().ReverseMap();
-			CreateMap<LeaveType, LeaveTypesDetailDto>();
-			CreateMap<CreateLeaveTypeCommand, LeaveType>();
-			CreateMap<UpdateLeaveTypeCommand, LeaveType>();
+			CreateMap<LeaveTypesDto, LeaveType>().ReverseMap();//C
+			CreateMap<LeaveType, LeaveTypesDetailDto>();//R
+			CreateMap<CreateLeaveTypeCommand, LeaveType>();//C
+			CreateMap<UpdateLeaveTypeCommand, LeaveType>();//U
 		}
 	}
 }
