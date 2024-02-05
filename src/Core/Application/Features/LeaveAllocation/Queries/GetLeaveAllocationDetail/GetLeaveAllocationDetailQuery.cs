@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetail
 {
-	public class GetLeaveAllocationDetailQuery:IRequest<LeaveAllocationDetailDto>
+	public class GetLeaveAllocationDetailQuery : IRequest<LeaveAllocationDetailDto>
 	{
-        public int Id { get; set; }
-    }
+		public int Id { get; set; }
+	}
 }
