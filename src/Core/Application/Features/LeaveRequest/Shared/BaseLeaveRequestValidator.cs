@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using LeaveManagement.Application.Contracts.Persistences;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.LeaveRequest.Shared
 {
@@ -15,6 +10,7 @@ namespace Application.Features.LeaveRequest.Shared
 		public BaseLeaveRequestValidator(ILeaveTypeRepository leaveTypeRepository)
 		{
 			_leaveTypeRepository = leaveTypeRepository;
+
 			RuleFor(p => p.StartDate)
 				.LessThan(p => p.EndDate).WithMessage("{PropertyName} must be before {ComparisonValue}");
 

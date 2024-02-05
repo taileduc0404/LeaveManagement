@@ -1,19 +1,16 @@
-﻿using Application.Contracts.Email;
+﻿
+using Application.Contracts.Email;
 using Application.Contracts.Logging;
 using Application.Exceptions;
+using Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
 using Application.Models.Email;
 using AutoMapper;
 using LeaveManagement.Application.Contracts.Persistences;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRequest
+namespace Application.Features.LeaveRequest.Commands.CreateLeaveRequest
 {
-	public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
+	public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveRequestCommand, Unit>
 	{
 		private readonly ILeaveTypeRepository _leaveTypeRepository;
 		private readonly ILeaveRequestRepository _leaveRequestRepository;
@@ -21,7 +18,7 @@ namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRequest
 		private readonly IAppLogger<UpdateLeaveRequestCommandHandler> _logger;
 		private readonly IMapper _mapper;
 
-		public UpdateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository,
+		public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository,
 			IMapper mapper,
 			ILeaveTypeRepository leaveTypeRepository,
 			IEmailSender emailSender,
@@ -34,34 +31,26 @@ namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRequest
 			this._mapper = mapper;
 		}
 
-		public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
+		public async Task<Unit> Handle(CreateLeaveRequestCommand request, CancellationToken cancellationToken)
 		{
-			var leaveRequest = await _leaveRequestRepository.GetByIdAsync(request.Id);
-			if (leaveRequest == null)
-			{
-				throw new NotFoundException(nameof(LeaveRequest), request.Id);
-			}
-
-			var validator = new UpdateLeaveRequestCommandValidator(_leaveTypeRepository, _leaveRequestRepository);
+			var validator = new CreateLeaveRequestCommandValidator(_leaveTypeRepository);
 			var validationResult = await validator.ValidateAsync(request);
 			if (validationResult.Errors.Any())
 			{
 				throw new BadRequestException("Invalid Leave Request.", validationResult);
 			}
 
-			_mapper.Map(request, leaveRequest);
-			await _leaveRequestRepository.UpdateAsync(leaveRequest);
+			var leaveRequest = _mapper.Map<LeaveManagement.Domain.LeaveRequest>(request);
+			await _leaveRequestRepository.CreateAsync(leaveRequest);
 
-
-			//send confirmation email
 			try
 			{
 				var email = new EmailMessage
 				{
 					To = string.Empty,
 					Body = $"Your leave request for {request.StartDate:D} to {request.EndDate:D} " +
-						$"has been updated successfully.",
-					Subject = "Leave request Updated."
+						$"has been submitted successfully.",
+					Subject = "Leave Request Submitted."
 				};
 				await _emailSender.SendMail(email);
 			}
@@ -69,7 +58,7 @@ namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRequest
 			{
 				_logger.LogWarning(ex.Message);
 			}
-			
+
 
 			return Unit.Value;
 		}

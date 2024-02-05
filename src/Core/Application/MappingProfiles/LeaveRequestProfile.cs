@@ -4,7 +4,6 @@ using Application.Features.LeaveRequest.Queries.GetAllLeaveRequestQuery;
 using Application.Features.LeaveRequest.Queries.GetLeaveRequestDetailQuery;
 using AutoMapper;
 using LeaveManagement.Domain;
-using System.Runtime.InteropServices;
 
 namespace Application.MappingProfiles
 {
