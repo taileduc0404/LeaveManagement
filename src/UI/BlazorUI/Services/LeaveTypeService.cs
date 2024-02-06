@@ -32,7 +32,7 @@ namespace BlazorUI.Services
 			}
 		}
 
-		public async Task<Response<Guid>> DeleteLeaveType(int id, LeaveTypeVM vm)
+		public async Task<Response<Guid>> DeleteLeaveType(int id)
 		{
 			try
 			{
@@ -49,7 +49,7 @@ namespace BlazorUI.Services
 			}
 		}
 
-		public async Task<LeaveTypeVM> GetLeaveTypeDetail(int id)
+		public async Task<LeaveTypeVM> GetLeaveTypeDetails(int id)
 		{
 			var leaveType = await _client.LeaveTypesGETAsync(id);
 			return _mapper.Map<LeaveTypeVM>(leaveType);
