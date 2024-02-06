@@ -27,10 +27,6 @@ namespace Application.Features.LeaveType.Commands.UpdateLeaveType
 				.LessThan(100).WithMessage("{PropertyName} cannot exceed 100")
 				.GreaterThan(1).WithMessage("{PropertyName} cannot be less than 1");
 
-			RuleFor(x => x)
-				.MustAsync(LeaveTypeNameUnique)
-				.WithMessage("LeaveType already exist.");
-
 			_repository = repository;
 		}
 

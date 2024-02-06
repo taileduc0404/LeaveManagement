@@ -15,7 +15,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 //  Microsoft.Extentions.Http
 builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri
-("http://localhost:43742"));
+("https://localhost:7173"));
 
 builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 builder.Services.AddScoped<ILeaveAllocationService, LeaveAllocationService>();

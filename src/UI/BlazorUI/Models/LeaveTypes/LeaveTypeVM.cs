@@ -10,6 +10,6 @@ namespace BlazorUI.Models.LeaveTypes
 		public string? Name { get; set; }
 		[Required]
 		[Display(Name = "Default Number Of Days")]
-		public string? DefaultDays { get; set; }
+		public int DefaultDay { get; set; }
 	}
 }

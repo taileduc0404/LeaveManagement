@@ -11,6 +11,8 @@ namespace BlazorUI.Pages.LeaveTypes
 
 		[Inject]
 		public ILeaveTypeService? LeaveTypeService { get; set; }
+		[Inject]
+		public ILeaveAllocationService? LeaveAllocationService { get; set; }
 		public List<LeaveTypeVM>? LeaveTypes { get; private set; }
 		public string Message { get; set; } = string.Empty;
 		protected void CreateLeaveType()
