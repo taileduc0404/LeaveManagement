@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using LeaveManagement.Application.Contracts.Persistences;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.LeaveType.Commands.CreateLeaveType
 {
@@ -19,7 +14,7 @@ namespace Application.Features.LeaveType.Commands.CreateLeaveType
 				.MaximumLength(70).WithMessage("{PropertyName} must be fewer than 70 characters.");
 
 			RuleFor(x => x.DefaultDay)
-				.LessThan(100).WithMessage("{PropertyName} cannot exceed 100")
+				.LessThan(365).WithMessage("{PropertyName} cannot exceed 100")
 				.GreaterThan(1).WithMessage("{PropertyName} cannot be less than 1");
 
 			RuleFor(x => x)
