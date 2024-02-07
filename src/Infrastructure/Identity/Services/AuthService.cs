@@ -32,14 +32,14 @@ public class AuthService : IAuthService
 
 		if (user == null)
 		{
-			throw new NotFoundException($"User with {request.Email} not found.", request.Email);
+			throw new NotFoundException($"User with '{request.Email}' not found.", request.Email);
 		}
 
 		var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 
 		if (result.Succeeded == false)
 		{
-			throw new BadRequestException($"Credentials for '{request.Email} aren't valid'.");
+			throw new BadRequestException($"Credentials for '{request.Email}' aren't valid.");
 		}
 
 		JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
@@ -54,7 +54,6 @@ public class AuthService : IAuthService
 
 		return response;
 	}
-
 
 	public async Task<RegistrationResponse> Register(RegistrationRequest request)
 	{
