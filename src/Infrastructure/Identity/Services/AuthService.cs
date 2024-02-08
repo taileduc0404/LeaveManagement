@@ -28,14 +28,14 @@ public class AuthService : IAuthService
 
 	public async Task<AuthResponse> Login(AuthRequest request)
 	{
-		var user = await _userManager.FindByEmailAsync(request.Email);
+		var user = await _userManager.FindByEmailAsync(request.Email!);
 
 		if (user == null)
 		{
-			throw new NotFoundException($"User with '{request.Email}' not found.", request.Email);
+			throw new NotFoundException($"User with '{request.Email}' not found.", request.Email!);
 		}
 
-		var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+		var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password!, false);
 
 		if (result.Succeeded == false)
 		{
@@ -66,7 +66,7 @@ public class AuthService : IAuthService
 			EmailConfirmed = true
 		};
 
-		var result = await _userManager.CreateAsync(user, request.Password);
+		var result = await _userManager.CreateAsync(user, request.Password!);
 
 		if (result.Succeeded)
 		{
@@ -94,15 +94,15 @@ public class AuthService : IAuthService
 
 		var claims = new[]
 		{
-				new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+				new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-				new Claim(JwtRegisteredClaimNames.Email, user.Email),
+				new Claim(JwtRegisteredClaimNames.Email, user.Email!),
 				new Claim("uid", user.Id)
 			}
 		.Union(userClaims)
 		.Union(roleClaims);
 
-		var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+		var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
 
 		var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
