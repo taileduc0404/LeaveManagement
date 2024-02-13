@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.Persistence
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUI", "src\UI\BlazorUI\BlazorUI.csproj", "{B482E198-406D-4EA4-A06C-5A6A256D9A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity", "src\Infrastructure\Identity\Identity.csproj", "{248F6465-6966-463F-BE92-F6C3B10B4DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity", "src\Infrastructure\Identity\Identity.csproj", "{248F6465-6966-463F-BE92-F6C3B10B4DF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

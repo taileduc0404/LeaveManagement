@@ -17,10 +17,12 @@ namespace API.Controllers
 	public class LeaveTypesController : ControllerBase
 	{
 		private readonly IMediator _mediator;
+
 		public LeaveTypesController(IMediator mediator)
 		{
-			_mediator = mediator;
+			this._mediator = mediator;
 		}
+
 		// GET: api/<LeaveTypesController>
 		[HttpGet]
 		public async Task<List<LeaveTypesDto>> Get()
@@ -42,22 +44,21 @@ namespace API.Controllers
 		[ProducesResponseType(201)]
 		[ProducesResponseType(400)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-
-		public async Task<ActionResult> Post(CreateLeaveTypeCommand command)
+		public async Task<ActionResult> Post(CreateLeaveTypeCommand leaveType)
 		{
-			var response = await _mediator.Send(command);
+			var response = await _mediator.Send(leaveType);
 			return CreatedAtAction(nameof(Get), new { id = response });
 		}
 
-		// PUT api/<LeaveTypesController>/5
+		// PUT api/<LeaveTypesController>
 		[HttpPut("{id}")]
-		[ProducesResponseType(400)]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		[ProducesResponseType(400)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesDefaultResponseType]
-		public async Task<ActionResult> Put(UpdateLeaveTypeCommand command)
+		public async Task<ActionResult> Put(UpdateLeaveTypeCommand leaveType)
 		{
-			var response = await _mediator.Send(command);
+			await _mediator.Send(leaveType);
 			return NoContent();
 		}
 

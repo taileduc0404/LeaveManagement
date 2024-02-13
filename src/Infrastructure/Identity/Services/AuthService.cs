@@ -102,7 +102,9 @@ public class AuthService : IAuthService
 		.Union(userClaims)
 		.Union(roleClaims);
 
-		var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
+		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key!);
+
+		var symmetricSecurityKey = new SymmetricSecurityKey(key);
 
 		var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
@@ -112,6 +114,7 @@ public class AuthService : IAuthService
 		   claims: claims,
 		   expires: DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes),
 		   signingCredentials: signingCredentials);
+
 		return jwtSecurityToken;
 	}
 
