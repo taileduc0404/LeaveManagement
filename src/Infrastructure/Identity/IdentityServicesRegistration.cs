@@ -3,6 +3,7 @@ using Application.Models.Identity;
 using Identity.Context;
 using Identity.Models;
 using Identity.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +35,10 @@ namespace Identity
 			{
 				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-			}).AddJwtBearer(o =>
+				options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+			}).AddJwtBearer(opt =>
 			{
-				o.TokenValidationParameters = new TokenValidationParameters
+				opt.TokenValidationParameters = new TokenValidationParameters
 				{
 					ValidateIssuerSigningKey = true,
 					ValidateIssuer = true,
@@ -45,11 +47,20 @@ namespace Identity
 					ClockSkew = TimeSpan.Zero,
 					ValidIssuer = configuration["JwtSettings:Issuer"],
 					ValidAudience = configuration["JwtSettings:Audience"],
-					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
-					(configuration["JwtSettings:Key"]!))
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!))
 				};
 
 			});
+
+			services.AddAuthentication(options =>
+			{
+				options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			});
+
+		
+
 
 			return services;
 		}

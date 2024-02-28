@@ -102,7 +102,9 @@ public class AuthService : IAuthService
 		.Union(userClaims)
 		.Union(roleClaims);
 
-		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key!);
+		var key_JWTSettings = _jwtSettings.Key;
+
+		var key = Encoding.UTF8.GetBytes(key_JWTSettings!);
 
 		var symmetricSecurityKey = new SymmetricSecurityKey(key);
 
