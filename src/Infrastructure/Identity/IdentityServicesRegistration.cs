@@ -52,12 +52,12 @@ namespace Identity
 
 			});
 
-			services.AddAuthentication(options =>
-			{
-				options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-				options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-			});
+			//services.AddAuthentication(options =>
+			//{
+			//	options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			//	options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			//	options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			//});
 
 		
 
